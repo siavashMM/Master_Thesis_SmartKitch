@@ -1,0 +1,18 @@
+<!-- src/app/components/home/home.html -->
+<div class="station-section">
+  <h2>Muesli Station</h2>
+
+  <!-- Order Progress -->
+  <div class="progress">
+    <p>Status: {{ orderStatus }}</p>
+    <div *ngIf="progressPercent !== null">
+      <progress [value]="progressPercent" max="100"></progress>
+      <span>{{ progressPercent }}%</span>
+    </div>
+  </div>
+
+  <!-- Add Order Button -->
+  <button (click)="addOrder()">
+    ➕ Add Order
+  </button>
+</div>

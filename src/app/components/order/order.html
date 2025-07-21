@@ -1,0 +1,44 @@
+<h2>Select Your Order</h2>
+
+<div class="container-grid">
+  <div class="container-item" *ngFor="let container of containers">
+    <!-- Container button -->
+    <button mat-button (click)="selectContainer(container)">
+      {{ container.label || 'Container ' + container.id }}
+    </button>
+
+    <!-- 3-dot menu button -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="setSelectedContainer(container)">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- Shared mat-menu for editing -->
+<mat-menu #menu="matMenu">
+  <!-- Edit Label -->
+  <button mat-menu-item (click)="editlable(selectedContainer!)">
+    <mat-icon>edit</mat-icon>
+    Edit Label
+  </button>
+
+  <!-- Edit Expiration Date -->
+  <button mat-menu-item (click)="editexpirationDate(selectedContainer!)">
+    <mat-icon>event</mat-icon>
+    Edit Expiration Date
+  </button>
+</mat-menu>
+<!-- Order Summary -->
+<div class="order-summary">
+  <h3>Current Order</h3>
+  <ul>
+    <li *ngFor="let item of order; let i = index">
+      {{ item.label }} - {{ item.amount }}cc
+      <button (click)="removeItem(i)">❌</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Action Buttons -->
+<button mat-raised-button color="primary" (click)="sendOrder()">Send Order</button>
+<button mat-button (click)="cancel()">Cancel</button>

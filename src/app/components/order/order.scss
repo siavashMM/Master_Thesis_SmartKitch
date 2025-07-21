@@ -1,0 +1,30 @@
+.container-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Group container button and 3-dot menu horizontally */
+.container-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between button and menu icon */
+}
+
+/* Optional: style container buttons for uniform size */
+button.mat-button {
+  flex: 1;
+  max-width: 120px;
+  height: 50px;
+  font-size: 14px;
+}
+
+/* Optional: adjust 3-dot icon button */
+button.mat-icon-button {
+  padding: 4px;
+}
