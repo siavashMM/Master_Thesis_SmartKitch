@@ -29,6 +29,7 @@ export class UserService {
     }
 
     getAppUser(): AppUser | null {
+        console.log('[UserService] Returning user:', this.appUser);
         return this.appUser;
     }
 ensureUserExists(): Observable<AppUser> {

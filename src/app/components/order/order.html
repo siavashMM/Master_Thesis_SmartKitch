@@ -42,3 +42,18 @@
 <!-- Action Buttons -->
 <button mat-raised-button color="primary" (click)="sendOrder()">Send Order</button>
 <button mat-button (click)="cancel()">Cancel</button>
+<!-- Order History -->
+<div *ngIf="orderHistory.length > 0">
+  <h3>Order History</h3>
+  <div *ngFor="let order of orderHistory" class="order-history-item">
+    <p><strong>Order ID:</strong> {{ order.orderId }}</p>
+    <p><strong>Timestamp:</strong> {{ order.timestamp | date:'short' }}</p>
+    <ul>
+      <li *ngFor="let item of order.items">
+        {{ item.label }} - {{ item.amount }}cc
+      </li>
+    </ul>
+    <p><strong>Status:</strong> In Progress <!-- Will be updated via IoT later --></p>
+    <hr />
+  </div>
+</div>

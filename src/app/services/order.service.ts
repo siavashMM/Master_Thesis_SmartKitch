@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { UserService } from './user.service';
+import { switchMap } from 'rxjs';
 
 export interface OrderItem {
   containerId: number;
@@ -11,7 +12,7 @@ export interface OrderItem {
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
-  private apiBase = 'https://wq822wnn45.execute-api.us-east-1.amazonaws.com/dev';
+  private apiBase = 'https://0uajdxrom5.execute-api.us-east-1.amazonaws.com/dev';
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
@@ -24,4 +25,17 @@ export class OrderService {
       items: order
     });
   }
+    getUserOrders(): Observable<any> {
+    return this.userService.getOrFetchUserId().pipe(
+      switchMap(userId => {
+        console.log('[OrderService] Fetching orders for userId:', userId);
+        return this.http.get<any>(`${this.apiBase}/orders?userId=${userId}`);
+      })
+    );
+  }
+
+
+
+
+
 }

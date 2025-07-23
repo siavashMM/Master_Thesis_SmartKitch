@@ -30,9 +30,6 @@ export class Order implements OnInit {
     private orderService: OrderService
   ) {}
 
-  ngOnInit(): void {
-    this.loadContainers();
-  }
 
   loadContainers(): void {
     this.containerService.getContainers().subscribe({
@@ -125,4 +122,25 @@ export class Order implements OnInit {
   setSelectedContainer(container: Container) {
     this.selectedContainer = container;
   }
+
+  orderHistory: any[] = [];
+
+  loadOrderHistory(): void {
+    this.orderService.getUserOrders().subscribe({
+      next: (res) => {
+        this.orderHistory = res.orders;
+      },
+      error: (err) => {
+        console.error('Failed to fetch order history:', err);
+      }
+    });
+  }
+  
+  ngOnInit(): void {
+    this.loadContainers();
+  this.loadOrderHistory(); // ✅ Fetch on init
+  }
+
+
+
 }
